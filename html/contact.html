@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>联系我们</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<script type="text/javascript" src="../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="../js/map.js"></script>
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=6992ea1c65c31fb5b3e58e2178cb0cf4"></script>
+</head>
+<body>
+	<div class="main">
+		<div class="top">
+			<div class="logo"><a href="index.html"><img src="../images/logo3.png" alt=""></a></div>
+			<ul>
+				<li><a href="index.html">网站首页</a></li>
+				<li><a href="product.html">摄影作品</a></li>
+				<li><a href="model.html">模特展示</a></li>
+				<li><a href="new.html">新闻中心</a></li>
+				<li><a href="contact.html"  class="selected">联系我们</a></li>
+			</ul>
+		</div>
+		<div class="header">
+			<div class="banner">
+				<img class="selected" src="../images/banner6.jpg" alt="">
+				<img src="../images/banner4.jpg" alt="">
+				<img src="../images/banner2.jpg" alt="">	
+			</div>			
+		</div>
+		<div class="contact">
+			<div class="title">
+				<h1>CONTACT<span>联系我们</span></h1>
+				<p>清摄影，让您感受摄影的魅力</p>
+			</div>
+			<!-- 联系方式 -->
+			<div class="rotate">
+				<a class="phone">
+					<div class="leftinfo">
+						<img src="../images/cant_01.png" alt="">
+						<div class="back"><span>电话<br>400-451-782</span></div>
+					</div>
+				</a>
+				<a class="weibo">
+					<div class="leftinfo">
+						<img src="../images/cant_02.png" alt="">
+						<div class="back"><span>微博<br>@清摄影微博</span></div>
+					</div>
+				</a>
+				<a class="weixin">
+					<div class="leftinfo">
+						<img src="../images/cant_03.png" alt="">
+						<div class="back"><span>微信<br>qingphotogrphy</span></div>
+					</div>
+				</a>	
+			</div>
+			<!-- 按钮 -->
+			<div class="btn">
+				<div id="button1">注册</div>
+				<div id="button2">上传您的摄影作品</div>
+			</div>
+			<!-- 注册表单 -->
+			<div class="login">
+				<form action="" method="get">
+					<div class="close1"><img src="../images/close.png" alt=""></div>
+					
+					<div class="int">
+						<label for="">用户名</label>
+						<input type="text" name="username" id="username" class="required" placeholder="请输入用户名"/>
+					</div>
+					<div class="int">
+						<label for="">密码</label>
+						<input type="password" id="psw" class="required" placeholder="请输入密码"/>
+					</div>
+					<div class="int">
+						<label for="">邮箱</label> 
+						<input type="text" id="email" class="required" placeholder="请输入邮箱"/>
+					</div>
+					<input type="submit" value="提交" id="send" class="submit"/>
+					<input type="reset" value="取消" id="res" class="reset"/>
+					<!-- 注册表单验证 -->
+					<script>
+						$(function(){
+							// blur输入域失去焦点时，验证表单内容
+							$(":input.required").blur(function(){
+								//判断一下鼠标离开谁了
+								if($(this).is("#username")){
+									$(".formtip").remove();
+									//按照用户名的规则去验证
+									if(this.value==""||this.value.length<6){
+									var errMsg = "<span class='formtip'>用户名至少是6个字母</span>";
+									$(this).parent().append(errMsg);
+									}else{
+									var msg = "<span class='formtip'>正确</span>";
+									$(this).parent().append(msg);
+									}
+								}
+								if($(this).is("#psw")){
+									$(".formti").remove();
+									//按照用户名的规则去验证
+									if(this.value==""||this.value.length<6){
+									var errMsg = "<span class='formti'>密码至少是6位数</span>";
+									$(this).parent().append(errMsg);
+									}else{
+									var msg = "<span class='formtip'>正确</span>";
+									$(this).parent().append(msg);
+									}
+								}
+							//判断一下如果是email的话,应该按照email的规则去验证
+							if($(this).is("#email")){
+								$(".emailtip").remove();
+								//按照email的规则去验证
+								var reg = /^\w{1,}@\w+\.\w+$/;
+								var $email = $("#email").val();
+								if(!reg.test($email)){
+									var errMsg = "<span class='emailtip'>邮箱不合法</span>";
+									$(this).parent().append(errMsg);
+								}else{
+									var Msg = "<span class='emailtip'>邮箱可以使用</span>";
+									$(this).parent().append(Msg);
+								}	
+							}
+							$('#submit').click(function(){
+								if($('#username').value!=""&& $('#psw').value!="" && $('#email').value!=""){
+									$('form').submit();
+								}else{
+									return false;
+								}
+							});
+						 	
+						});
+						});
+					</script>
+				</form>
+				<!-- 控制注册表单隐藏 -->
+				<script>
+					$(function(){
+						$('#button1').click(function(){
+							$('.close1').show();
+							$('.login').fadeIn(1000);
+						});
+						$('.close1').click(function(){
+							$('.close1').hide();
+							$('.login').fadeOut(500);
+						});
+					});
+				</script>				
+			</div>
+
+			<!-- 上传作品表单 -->
+			<div class="mail">
+			    <div class="send">
+				    <div class="sendbox">
+				    <form action="#" method="get" class="messages" >
+				    	<div class="close"><img src="../images/close.png" alt=""></div>
+				        <div class="messlist">
+				            <label>用户名</label>
+				            <input type="text" placeholder="用户名" id="input1" onblur="jieshou()">
+				            <div id ="label0">*你还没填写名字呢!</div>
+				            <div id ="label1">√正确</div>
+				            <div id ="label2">×错误</div>
+				            <div class="clears"></div>
+				        </div>
+
+					    <div class="messlist">
+					        <label>电子邮件</label>
+					        <input type="text" placeholder="电子邮件" id="input2" onblur="mailtext()">
+					        <div id ="label3">√正确</div>
+					        <div id ="label4">×邮箱地址错误</div>
+					        <div id ="label5">*必填</div>
+					        <div class="clears"></div>
+					    </div>
+
+					    <div class="messlist">
+					        <label>作品名</label>
+					        <input type="text" placeholder="作品名" id="input3" onblur="producttext()">
+					        <div id ="label6">*请输入您的作品名!</div>
+					        <div id ="label7">√正确</div>
+					        <div id ="label11">×错误</div>
+					        <div class="clears"></div>
+					    </div>
+
+					     <div class="messlist textareas">
+						      <label>选择作品</label>
+						    
+						       <input type="file" id="input4" onblur="content()">
+						      <div id ="label8">√正确</div>
+						      <div id ="label10">* 必填</div>
+						      <div class="clears"></div>
+					     </div>
+
+					     <div class="messlist yzms">
+						      <label>验证码</label>
+						      <input type="text" placeholder="验证码" id="input5" />
+						      <img src="../images/yzm.jpg" width="64" height="27" class="yzmimg" />
+						      <div class="clears"></div>
+					     </div>
+
+					     <div class="messsub">
+						      <input type="submit" value="上传" onclick="send()"style="background:#00a3eb;color:#fff;" />
+						      <input type="reset" value="取消" />
+					     </div>
+					</form>	 
+						<script>
+							function send(){
+								var name = document.getElementById("input1").value;
+								var mail = document.getElementById("input2").value;
+								var phone = document.getElementById("input3").value;
+								var content = document.getElementById("input4").value;
+								var code = document.getElementById("input5").value;
+								if(name=="")
+								{
+									label2.style.display = 'none';
+									label1.style.display = 'none';
+									label0.style.display = 'block';;
+									return false;
+								}
+								if(mail=="")
+								{
+									label3.style.display = 'none';
+									label4.style.display = 'none';
+									label5.style.display = 'block';;
+									return false;
+								}
+
+								if(content=="")
+								{
+							        label8.style.display = 'none'; 
+							        // label9.style.display = 'none'; 
+							        label10.style.display = 'block'; //*必填
+							        return false;
+								}
+								if(code=="")
+								{
+								   alert('请填写验证码！');
+								   return false;  
+								}
+								else{
+									alert('作品以上传到清摄影邮箱，感谢您的支持！');
+								}
+
+							}
+						</script>
+
+						<script>
+							function jieshou(){
+								var label1 = document.getElementById("label1");
+								var label2 = document.getElementById("label2");
+								var nametext = document.getElementById("input1").value;
+								if(nametext!=""){
+								label0.style.display = 'none';
+								label1.style.display = 'block';
+								label2.style.display = 'none';
+								}
+								else{
+								label0.style.display = 'block';
+								label1.style.display = 'none';
+								label2.style.display = 'none';
+								}
+							}
+						</script>
+
+						<script>
+							function mailtext(){
+								var mailvalue = document.getElementById("input2").value;
+								var mailtext = document.getElementById("input2");
+								var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+								if(mailvalue!=""){ //邮箱如果非空 显示正确
+								label5.style.display = 'none';  
+								label3.style.display = 'block';//显示正确
+								label4.style.display = 'none';       
+								}
+								else{
+								label5.style.display = 'block';//显示*必填
+								label3.style.display = 'none';
+								label4.style.display = 'none'; 
+								return false;
+								}
+								//上面为一段
+
+
+								if(!myreg.test(mailvalue)){  //既而 正则表达式 验证邮箱 如果不是邮箱地址label4显示出来
+								        label3.style.display = 'none'; 
+								        label4.style.display = 'block'; //*邮箱地址错误
+								        return false;
+								    }    
+								else{
+								        label3.style.display = 'block'; 
+								        label5.style.display = 'none';
+								        label4.style.display = 'none';
+								}
+								//上面为一段
+
+							}
+						</script>
+
+						<script>
+							function producttext(){
+							
+								var label7 = document.getElementById("label7");
+								var label11 = document.getElementById("label11");
+								var nametext = document.getElementById("input3").value;
+								if(nametext!=""){
+								label6.style.display = 'none';
+								label7.style.display = 'block';
+								label11.style.display = 'none';
+								}
+								else{
+								label6.style.display = 'block';
+								label7.style.display = 'none';
+								label11.style.display = 'none';
+								}
+							}
+						</script>
+
+						</script>
+
+						<script>
+							function content(){
+								var content = document.getElementById("input4").value;
+								if(content!=""){ 
+								        label8.style.display = 'block'; 
+								        // label9.style.display = 'none'; 
+								        label10.style.display = 'none'; //*必填
+								        return false;
+								    } 
+								else{
+								        label8.style.display = 'none'; 
+								        // label9.style.display = 'none'; 
+								        label10.style.display = 'block';  
+								}
+
+							}
+						</script>
+					</div>
+			 	</div>
+			</div>
+			<!-- 控制提交作品表单隐藏 -->
+			<script>
+				$(function(){
+					$('#button2').click(function(){
+						$('.close').show();
+						$('.mail').fadeIn(1000);
+					});
+					$('.close').click(function(){
+						$('.close').hide();
+						$('.mail').fadeOut(500);
+					});
+				});
+			</script>
+			<!-- 地图 -->
+			<div class="map">地图搜索我们：</div>
+			<div id="mapa"></div>
+			<div class="introduce">
+				<p>清摄影(QingPhotography)，是一家摄影赏析网站，。除了让用户感受摄影的魅力之外，用户还可以上传自优秀作品，我们将为您展示在网页上，用户也可以预约本网站的摄影师和模特为您拍摄专业的照片，为您展示商品！</p>
+				<p>您可以通过以上方式联系我们，只要你提出要求，我们就全力满足。</p>
+			</div>
+		</div>
+		<div class="footer">
+			<a href="index.html"><img src="../images/logo.png" alt=""></a>
+			<div class="aa">
+				<ul>
+					<li>客服中心</li>
+					<li>常见问题</li>
+					<li>网站简介</li>
+					<li>拍摄场地</li>
+				</ul>
+			</div>
+			<div class="bb">
+				<ul>
+					<li>联系地址</li>
+					<li>电话回访</li>
+					<li>联系我们</li>
+					<li>网站中心</li>
+				</ul>
+			</div>
+			<div class="cc">
+				<span>清摄影，让您感受摄影的魅力</span>
+				<p>Copyright &copy; 2015-2016 .Company name All rights reserved</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
